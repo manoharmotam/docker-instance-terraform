@@ -13,13 +13,13 @@ resource "aws_instance" "docker" {
     volume_type           = "gp3"
 
     tags = {
-      "Name"       = "Docker-volume"
+      "Name"       = "docker-volume"
       "Managed By" = "Terraform"
     }
   }
 
   tags = {
-    "Name"       = "Docker-instance"
+    "Name"       = "docker-instance"
     "Managed By" = "Terraform"
   }
 }
@@ -55,7 +55,11 @@ resource "aws_security_group" "docker_sg" {
   }
 
   tags = {
-    "Name"       = "Docker-instance"
+    "Name"       = "docker-instance"
     "Managed By" = "Terraform"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
