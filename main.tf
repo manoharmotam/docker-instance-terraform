@@ -2,7 +2,7 @@ resource "aws_instance" "docker" {
     ami = local.ami
     instance_type = "t3.micro"
     vpc_security_group_ids = [ aws_security_group.docker_sg.id ]
-    userdata = templatefile("${path.module}/docker.sh.tftpl", {
+    user_data =  = templatefile("${path.module}/docker.sh.tftpl", {
         partition_number = 4
         extend_size = 30
     })
@@ -10,7 +10,7 @@ resource "aws_instance" "docker" {
     root_block_device{
         delete_on_termination = true
         volume_size = 50
-        type = "gp3"
+        volume_type = "gp3"
 
         tags = {
         "Name" = "Docker-volume"
